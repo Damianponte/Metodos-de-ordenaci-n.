@@ -1,3 +1,4 @@
+import java.util.Random;
 
 
 public class algoritmosdeordenacion
@@ -46,21 +47,23 @@ public class algoritmosdeordenacion
                 return arrayOrdenada;
             }
 
-
-
-
-
     public static void main(String[] arg)
     {
-        //array que vamos a ordenar
-        int[] numero =new int[5];
-        numero[0]=5;
-        numero[1]=8;
-        numero[2]=3;
-        numero[3]=6;
-        numero[4]=1;
 
+        boolean mostrarResultados = false;
+
+        //array que vamos a ordenar
+        int[] numero =new int[50000];
+        Random random=new Random();
+        for (int i=0;i< numero.length;i++)
+            numero[i]= random.nextInt(100000);
+        // vamos a buscar el tiempo que tarda
+
+        long tiempoInicioInserccion = System.currentTimeMillis();
         int[] ordenado=insert(numero);
+        long tiempofinInserccion = System.currentTimeMillis();
+        long transcurridoInserccion=tiempofinInserccion - tiempoInicioInserccion;
+        System.out.println("el tiempo transcurrido es:" + transcurridoInserccion + " en ms");
 
         System.out.print("Array original: ");
         for (int i = 0; i < numero.length; i++) {
@@ -68,20 +71,28 @@ public class algoritmosdeordenacion
         }
 
         System.out.println();
-
+        // parte ordenacion por inserccion
         System.out.print("Array ordenado(inserccion): ");
         for (int i=0;i< ordenado.length;i++) {
             System.out.print(ordenado[i] + " ");
         }
-        System.out.print("\n");
 
+        System.out.print("\n");
+        // parte ordenacion por burbuja
+        long tiempoInicioBurbuja = System.currentTimeMillis();
+        //ponemos la funcion antes y despues
        int [] arrayordenada=burbuja(numero);
+        long tiempoFinBurbuja=System.currentTimeMillis();
+        long transcurridoBurbuja=tiempoFinBurbuja-tiempoInicioBurbuja;
+        System.out.println("el tiempo transcurrido es:" + transcurridoBurbuja + " en ms");
+
         System.out.print("array ordenada (burbuja) ");
 
         for(int i = 0; i < arrayordenada.length;i++)
         {
             System.out.print(arrayordenada[i] + " ");
         }
+
 
     }
 
